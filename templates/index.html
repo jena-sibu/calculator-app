@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calculator</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e, #16213e);
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 10px;
+    }
+
+    .calculator-container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(6px);
+      border: 1px solid rgba(0, 255, 255, 0.2);
+      border-radius: 10px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      padding: 20px;
+      width: 100%;
+      max-width: 300px;
+      animation: fadeIn 0.5s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.95);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    h1 {
+      color: #00ffe7;
+      text-align: center;
+      font-size: 1.8em;
+      margin-bottom: 15px;
+    }
+
+    .display {
+      background: #0f3460;
+      border: none;
+      border-radius: 5px;
+      color: #ffffff;
+      font-size: 1.5em;
+      padding: 10px;
+      width: 100%;
+      text-align: right;
+      margin-bottom: 15px;
+    }
+
+    .button-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .btn {
+      background: #00adb5;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 1.2em;
+      padding: 12px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background: #03c4cc;
+    }
+
+    .btn-equals {
+      background: #3ec70b;
+      grid-column: span 2;
+    }
+
+    .btn-clear {
+      background: #ff5722;
+    }
+
+    .footer {
+      margin-top: 15px;
+      text-align: center;
+      color: #aaa;
+      font-size: 0.8em;
+    }
+  </style>
+</head>
+<body>
+  <div class="calculator-container">
+    <h1>calculator</h1>
+    <input type="text" id="display" class="display" value="0" readonly />
+    <div class="button-grid">
+      <button class="btn btn-clear" onclick="clearDisplay()">C</button>
+      <button class="btn" onclick="append('/')">÷</button>
+      <button class="btn" onclick="append('*')">×</button>
+      <button class="btn" onclick="append('-')">−</button>
+
+      <button class="btn" onclick="append('7')">7</button>
+      <button class="btn" onclick="append('8')">8</button>
+      <button class="btn" onclick="append('9')">9</button>
+      <button class="btn" onclick="append('+')">+</button>
+
+      <button class="btn" onclick="append('4')">4</button>
+      <button class="btn" onclick="append('5')">5</button>
+      <button class="btn" onclick="append('6')">6</button>
+      <button class="btn" onclick="append('.')">.</button>
+
+      <button class="btn" onclick="append('1')">1</button>
+      <button class="btn" onclick="append('2')">2</button>
+      <button class="btn" onclick="append('3')">3</button>
+      <button class="btn btn-equals" onclick="calculate()">=</button>
+
+      <button class="btn" onclick="append('0')" style="grid-column: span 2;">0</button>
+    </div>
+    <div class="footer">calculator | CI/CD Project</div>
+  </div>
+
+  <script>
+    const display = document.getElementById('display');
+
+    function append(value) {
+      if (display.value === '0' || display.value === 'Error') {
+        display.value = value;
+      } else {
+        display.value += value;
+      }
+    }
+
+    function clearDisplay() {
+      display.value = '0';
+    }
+
+    function calculate() {
+      try {
+        const result = eval(display.value);
+        display.value = result;
+      } catch (e) {
+        display.value = 'Error';
+      }
+    }
+  </script>
+</body>
+</html>
